@@ -1,7 +1,11 @@
 from mcp.server.fastmcp import FastMCP
+from mcp.server.sse import SseServerTransport
 import logging
 from typing import Any
 import httpx
+from starlette.applications import Starlette
+from starlette.routing import Route
+import uvicorn
 
 logging.basicConfig(
     level=logging.INFO,
@@ -55,5 +59,8 @@ async def get_latest_weekly_news() -> str:
 
 if __name__ == "__main__":
     logger.info("Starting MCP server")
-    mcp.run(transport="stdio")
+    app = mcp.streamable_http_app()
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+    
+    
     
