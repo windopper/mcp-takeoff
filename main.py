@@ -59,7 +59,7 @@ async def get_latest_weekly_news() -> str:
 
 if __name__ == "__main__":
     logger.info("Starting MCP server")
-    uvicorn.run(mcp.streamable_http_app, host="localhost", port=8000)
+    uvicorn.run(mcp.streamable_http_app, host="localhost", port=8080)
     
     
     
