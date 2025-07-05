@@ -1,3 +1,4 @@
-startCommand:
-  type: "http"
+runtime: "container"
+start:
+  command: ["python", "main.py"]
   port: 8000
