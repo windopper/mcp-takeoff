@@ -1,2 +1,4 @@
-startCommand:
-  type: stdio
+version: 1
+start:
+  command: ["python", "main.py"]
+  port: 8000
