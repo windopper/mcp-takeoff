@@ -53,7 +53,7 @@ export default function createStatelessServer({
     {},
     async () => {
       try {
-        const result = await makeTakeoffRequest("posts");
+        const result = await makeTakeoffRequest("weeklynews");
         return {
           content: [
             {
