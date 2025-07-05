@@ -1,6 +1,14 @@
 from mcp.server.fastmcp import FastMCP
+import logging
 from typing import Any
 import httpx
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+
+logger = logging.getLogger("mcp-takeoff")
 
 mcp = FastMCP('takeoff')
 
@@ -19,15 +27,33 @@ async def make_takeoff_request(endpoint: str) -> dict[str, Any] | None:
 
 @mcp.tool()
 async def get_latest_posts() -> str:
-    """Get the latest AI issue posts from the Takeoff API"""
+    """
+    Get the latest AI issue posts from the Takeoff API
+    
+    Args:
+        None
+    
+    Returns:
+        str: The latest AI issue posts from the Takeoff API
+    """
     result = await make_takeoff_request("posts")
     return str(result) if result else "Failed to fetch posts"
 
 @mcp.tool()
 async def get_latest_weekly_news() -> str:
-    """Get the latest AI weekly news from the Takeoff API"""
+    """
+    Get the latest AI weekly news from the Takeoff API
+    
+    Args:
+        None
+        
+    Returns:
+        str: The latest AI weekly news from the Takeoff API
+    """
     result = await make_takeoff_request("weeklynews")
     return str(result) if result else "Failed to fetch weekly news"
 
 if __name__ == "__main__":
-    mcp.run(transport='stdio')
+    logger.info("Starting MCP server")
+    mcp.run(transport="stdio")
+    
